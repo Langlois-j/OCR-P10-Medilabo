@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Le SDK récent est nécessaire pour lire le format .slnx ; les projets ciblent net8.0.
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.0.x
+            10.0.x
+
+      - name: Restore
+        run: dotnet restore OCR-P10-Medilabo.slnx
+
+      - name: Build
+        run: dotnet build OCR-P10-Medilabo.slnx --no-restore -c Release
+
+      - name: Test
+        run: dotnet test OCR-P10-Medilabo.slnx --no-build -c Release
