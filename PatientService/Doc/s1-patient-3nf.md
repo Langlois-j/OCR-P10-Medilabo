@@ -3,7 +3,7 @@
 Fichier XXLS de 6 colonnes avec 4 cas de test
 
 # 1NF
-Clé primaire  GUID, Valeurs atomiques (Adresse : String, téléphone : String).
+Clé primaire  int, Valeurs atomiques (Adresse : String, téléphone : String).
 
 # 2NF
 Clé simple pas de dépendence.
