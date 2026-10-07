@@ -20,6 +20,26 @@ public sealed class Patient
     public string? Address { get; private set; }
     public string? PhoneNumber { get; private set; }
 
-    public static Patient Create(string firstName, string lastName, DateOnly birthDate, Gender gender, string? address = null, string? phoneNumber = null)
-        => new(firstName, lastName, birthDate, gender, address, phoneNumber);
+    public static Patient Create(
+    string firstName,
+    string lastName,
+    DateOnly birthDate,
+    Gender gender,
+    TimeProvider timeProvider,
+    string? address = null,
+    string? phoneNumber = null)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(firstName);
+        ArgumentException.ThrowIfNullOrWhiteSpace(lastName);
+
+        if (!Enum.IsDefined(gender))
+        {
+            throw new ArgumentOutOfRangeException(nameof(gender));
+        }
+
+        var today = DateOnly.FromDateTime(timeProvider.GetUtcNow().UtcDateTime);
+        ArgumentOutOfRangeException.ThrowIfGreaterThan(birthDate, today);
+
+        return new Patient(firstName.Trim(), lastName.Trim(), birthDate, gender, address, phoneNumber);
+    }
 }
