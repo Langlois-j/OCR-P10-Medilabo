@@ -1,5 +1,7 @@
 using System.Globalization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using PatientService.Data;
 using PatientService.Models;
 
@@ -14,7 +16,8 @@ public class PatientSeedTests
             .Options;
         using var context = new PatientDbContext(options);
 
-        return context.Model.FindEntityType(typeof(Patient))!
+        return context.GetService<IDesignTimeModel>().Model
+            .FindEntityType(typeof(Patient))!
             .GetSeedData()
             .ToList();
     }
