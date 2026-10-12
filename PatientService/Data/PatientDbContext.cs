@@ -20,6 +20,8 @@ public sealed class PatientDbContext(DbContextOptions<PatientDbContext> options)
             patient.Property(p => p.Gender).IsRequired().HasConversion<string>().HasMaxLength(1);
             patient.Property(p => p.Address).HasMaxLength(200);
             patient.Property(p => p.PhoneNumber).HasMaxLength(20);
+
+            patient.HasData(PatientSeed.Patients);
         });
     }
 }
