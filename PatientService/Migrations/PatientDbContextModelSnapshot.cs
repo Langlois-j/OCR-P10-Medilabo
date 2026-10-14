@@ -59,6 +59,48 @@ namespace PatientService.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Patients", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "1 Brookside St",
+                            BirthDate = new DateOnly(1966, 12, 31),
+                            FirstName = "Test",
+                            Gender = "F",
+                            LastName = "TestNone",
+                            PhoneNumber = "100-222-3333"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Address = "2 High St",
+                            BirthDate = new DateOnly(1945, 6, 24),
+                            FirstName = "Test",
+                            Gender = "M",
+                            LastName = "TestBorderline",
+                            PhoneNumber = "200-333-4444"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Address = "3 Club Road",
+                            BirthDate = new DateOnly(2004, 6, 18),
+                            FirstName = "Test",
+                            Gender = "M",
+                            LastName = "TestInDanger",
+                            PhoneNumber = "300-444-5555"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Address = "4 Valley Dr",
+                            BirthDate = new DateOnly(2002, 6, 28),
+                            FirstName = "Test",
+                            Gender = "F",
+                            LastName = "TestEarlyOnset",
+                            PhoneNumber = "400-555-6666"
+                        });
                 });
 #pragma warning restore 612, 618
         }
