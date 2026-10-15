@@ -131,4 +131,100 @@ public class PatientTests
         Assert.Equal(expectedFirstName, patient.FirstName);
         Assert.Equal(expectedLastName, patient.LastName);
     }
+    [Fact]
+    public void UpdateReplacesAllFields()
+    {
+        // Arrange
+        var patient = CreateValidPatient(address: "old address", phoneNumber: "000-000-0000");
+
+        // Act
+        patient.Update("Jane", "Doe", new DateOnly(1990, 5, 20), Gender.M, _clock, "new address", "111-111-1111");
+
+        // Assert
+        Assert.Equal("Jane", patient.FirstName);
+        Assert.Equal("Doe", patient.LastName);
+        Assert.Equal(new DateOnly(1990, 5, 20), patient.BirthDate);
+        Assert.Equal(Gender.M, patient.Gender);
+        Assert.Equal("new address", patient.Address);
+        Assert.Equal("111-111-1111", patient.PhoneNumber);
+    }
+
+    private static void UpdateValidPatient(
+    Patient patient,
+    string? firstName = "Jane",
+    string? lastName = "Doe",
+    DateOnly? birthDate = null,
+    Gender gender = Gender.M)
+    {
+        patient.Update(
+            firstName!,
+            lastName!,
+            birthDate ?? new DateOnly(1990, 5, 20),
+            gender,
+            _clock,
+            address: null,
+            phoneNumber: null);
+    }
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData(" ")]
+    public void UpdateWithBlankFirstNameThrowsArgumentException(string? invalidValue)
+    {
+        var patient = CreateValidPatient();
+
+        Assert.ThrowsAny<ArgumentException>(() => UpdateValidPatient(patient, firstName: invalidValue));
+    }
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData(" ")]
+    public void UpdateWithBlankLastNameThrowsArgumentException(string? invalidValue)
+    {
+        var patient = CreateValidPatient();
+
+        Assert.ThrowsAny<ArgumentException>(() => UpdateValidPatient(patient, lastName: invalidValue));
+    }
+
+    [Fact]
+    public void UpdateWithBirthDateTomorrowThrowsArgumentOutOfRangeException()
+    {
+        var patient = CreateValidPatient();
+
+        Assert.Throws<ArgumentOutOfRangeException>(
+            () => UpdateValidPatient(patient, birthDate: new DateOnly(2026, 10, 8)));
+    }
+
+    [Fact]
+    public void UpdateWithUndefinedGenderThrowsArgumentOutOfRangeException()
+    {
+        var patient = CreateValidPatient();
+
+        Assert.Throws<ArgumentOutOfRangeException>(
+            () => UpdateValidPatient(patient, gender: (Gender)99));
+    }
+
+    [Fact]
+    public void UpdateWithInvalidDataLeavesPatientUnchanged()
+    {
+        var patient = CreateValidPatient();
+
+        Assert.ThrowsAny<ArgumentException>(() => UpdateValidPatient(patient, firstName: " "));
+
+        Assert.Equal(_defaultFirstName, patient.FirstName);
+        Assert.Equal(_defaultLastName, patient.LastName);
+    }
+
+    [Fact]
+    public void UpdateTrimsNamesSurroundingWhitespace()
+    {
+        var patient = CreateValidPatient();
+
+        UpdateValidPatient(patient, firstName: "  Jane  ", lastName: "  Doe ");
+
+        Assert.Equal("Jane", patient.FirstName);
+        Assert.Equal("Doe", patient.LastName);
+    }
 }

@@ -21,13 +21,44 @@ public sealed class Patient
     public string? PhoneNumber { get; private set; }
 
     public static Patient Create(
-    string firstName,
-    string lastName,
-    DateOnly birthDate,
-    Gender gender,
-    TimeProvider timeProvider,
-    string? address = null,
-    string? phoneNumber = null)
+      string firstName,
+      string lastName,
+      DateOnly birthDate,
+      Gender gender,
+      TimeProvider timeProvider,
+      string? address = null,
+      string? phoneNumber = null)
+    {
+        Validate(firstName, lastName, birthDate, gender, timeProvider);
+
+        return new Patient(firstName.Trim(), lastName.Trim(), birthDate, gender, address, phoneNumber);
+    }
+
+    public void Update(
+        string firstName,
+        string lastName,
+        DateOnly birthDate,
+        Gender gender,
+        TimeProvider timeProvider,
+        string? address,
+        string? phoneNumber)
+    {
+        Validate(firstName, lastName, birthDate, gender, timeProvider);
+
+        FirstName = firstName.Trim();
+        LastName = lastName.Trim();
+        BirthDate = birthDate;
+        Gender = gender;
+        Address = address;
+        PhoneNumber = phoneNumber;
+    }
+
+    private static void Validate(
+        string firstName,
+        string lastName,
+        DateOnly birthDate,
+        Gender gender,
+        TimeProvider timeProvider)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(firstName);
         ArgumentException.ThrowIfNullOrWhiteSpace(lastName);
@@ -39,7 +70,5 @@ public sealed class Patient
 
         var today = DateOnly.FromDateTime(timeProvider.GetUtcNow().UtcDateTime);
         ArgumentOutOfRangeException.ThrowIfGreaterThan(birthDate, today);
-
-        return new Patient(firstName.Trim(), lastName.Trim(), birthDate, gender, address, phoneNumber);
     }
 }
