@@ -1,6 +1,7 @@
-﻿<Solution>
+<Solution>
   <Project Path="Front/Front.csproj" />
   <Project Path="Gateway/Gateway.csproj" />
+  <Project Path="PatientService.IntegrationTests/PatientService.IntegrationTests.csproj" />
   <Project Path="PatientService.UnitTests/PatientService.UnitTests.csproj" />
   <Project Path="PatientService/PatientService.csproj" />
 </Solution>
