@@ -76,7 +76,6 @@ public class PatientsServiceTests
     private static PatientRequest NewRequest(string firstName = "Jane", string lastName = "Doe")
         => new(firstName, lastName, new DateOnly(1990, 5, 20), Gender.M, "1 Main St", "100-222-3333");
 
-    // ----- Liste paginée -----
 
     [Fact]
     public async Task GetPageReturnsRequestedPage()
@@ -108,7 +107,6 @@ public class PatientsServiceTests
         await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() => service.GetPageAsync(page, pageSize, _ct));
     }
 
-    // ----- Détail -----
 
     [Fact]
     public async Task GetByIdWithExistingPatientReturnsDto()
@@ -133,7 +131,6 @@ public class PatientsServiceTests
         Assert.Null(dto);
     }
 
-    // ----- Création -----
 
     [Fact]
     public async Task CreateWithValidRequestPersistsPatientAndReturnsDto()
@@ -160,7 +157,6 @@ public class PatientsServiceTests
         Assert.Equal(0, repository.Count);
     }
 
-    // ----- Mise à jour -----
 
     [Fact]
     public async Task UpdateWithExistingPatientReplacesFieldsAndReturnsDto()
