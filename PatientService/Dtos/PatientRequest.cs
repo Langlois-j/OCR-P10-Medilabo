@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using PatientService.Models;
 
 namespace PatientService.Dtos;
@@ -5,7 +6,7 @@ namespace PatientService.Dtos;
 public sealed record PatientRequest(
     string FirstName,
     string LastName,
-    DateOnly BirthDate,
-    Gender Gender,
+    [property: JsonRequired] DateOnly BirthDate,
+    [property: JsonRequired] Gender Gender,
     string? Address,
     string? PhoneNumber);
