@@ -1,7 +1,7 @@
 info:
-  name: 4 - Mise à jour patient
+  name: 4-0 Mise à jour patient Valide
   type: http
-  seq: 6
+  seq: 1
 
 http:
   method: PUT
@@ -14,7 +14,7 @@ http:
         "lastName": "Doe",
         "birthDate": "1990-05-20",
         "gender": "F",
-        "address": "{{NewAdress}}",
+        "address": "{{NewAddress}}",
         "phoneNumber": "{{NewPhone}}"
       }
   auth: inherit
@@ -25,7 +25,7 @@ runtime:
       value: Sam
     - name: NewPhone
       value: "000000000000"
-    - name: NewAdress
+    - name: NewAddress
       value: Place
   assertions:
     - expression: res.status
@@ -33,7 +33,7 @@ runtime:
       value: "200"
     - expression: res.body.address
       operator: eq
-      value: '"{{NewAdress}}"'
+      value: '"{{NewAddress}}"'
     - expression: res.body.phoneNumber
       operator: eq
       value: '"{{NewPhone}}"'

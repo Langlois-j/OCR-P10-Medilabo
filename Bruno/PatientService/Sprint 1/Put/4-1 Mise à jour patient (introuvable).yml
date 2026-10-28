@@ -1,18 +1,21 @@
 info:
-  name: 5 - Création sans birthDate
+  name: 4-1 Mise à jour patient (introuvable)
   type: http
-  seq: 9
+  seq: 2
 
 http:
-  method: POST
-  url: "{{baseUrl}}/patients"
+  method: PUT
+  url: "{{baseUrl}}/patients/0"
   body:
     type: json
     data: |-
       {
-        "firstName": "Jane",
+        "firstName": "Janet",
         "lastName": "Doe",
-        "gender": "F"
+        "birthDate": "1990-05-20",
+        "gender": "F",
+        "address": "10 Rue Test",
+        "phoneNumber": "500-666-7777"
       }
   auth: inherit
 
@@ -20,7 +23,7 @@ runtime:
   assertions:
     - expression: res.status
       operator: eq
-      value: "400"
+      value: "404"
 
 settings:
   encodeUrl: true

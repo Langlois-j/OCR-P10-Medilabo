@@ -1,5 +1,5 @@
 info:
-  name: 1 -2 Liste paginée P2
+  name: 1-2 Liste paginée Page2
   type: http
   seq: 2
 
@@ -27,7 +27,7 @@ runtime:
       operator: eq
       value: "2"
     - expression: res.body.pageSize
-      operator: gte
+      operator: eq
       value: "2"
 
 settings:

@@ -1,21 +1,18 @@
 info:
-  name: 4-3 - Mise à jour patient copy Bad name
+  name: 3-1 Création patient Invalide (birthDate)
   type: http
-  seq: 8
+  seq: 4
 
 http:
-  method: PUT
-  url: "{{baseUrl}}/patients/{{createdId}}"
+  method: POST
+  url: "{{baseUrl}}/patients"
   body:
     type: json
     data: |-
       {
-        "firstName": "",
+        "firstName": "Jane",
         "lastName": "Doe",
-        "birthDate": "1990-05-20",
-        "gender": "F",
-        "address": "10 Rue Test",
-        "phoneNumber": "500-666-7777"
+        "gender": "F"
       }
   auth: inherit
 
