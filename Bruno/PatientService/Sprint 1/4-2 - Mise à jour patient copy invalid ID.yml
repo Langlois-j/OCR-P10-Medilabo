@@ -1,0 +1,33 @@
+info:
+  name: 4-2 - Mise à jour patient copy invalid ID
+  type: http
+  seq: 7
+
+http:
+  method: PUT
+  url: "{{baseUrl}}/patients/0"
+  body:
+    type: json
+    data: |-
+      {
+        "firstName": "Janet",
+        "lastName": "Doe",
+        "birthDate": "1990-05-20",
+        "gender": "F",
+        "address": "10 Rue Test",
+        "phoneNumber": "500-666-7777"
+      }
+  auth: inherit
+
+runtime:
+  assertions:
+    - expression: res.status
+      operator: eq
+      value: "404"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
