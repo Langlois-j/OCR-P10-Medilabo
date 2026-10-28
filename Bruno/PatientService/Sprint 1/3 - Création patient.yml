@@ -1,0 +1,67 @@
+info:
+  name: 3 - Création patient
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: "{{baseUrl}}/patients"
+  body:
+    type: json
+    data: |-
+      {
+        "firstName": "{{vFirstName}}",
+        "lastName": "{{vLastName}}",
+        "birthDate": "{{vBirthDate}}",
+        "gender": "{{vGender}}"
+      }
+  auth: inherit
+
+runtime:
+  variables:
+    - name: vFirstName
+      value: Jane
+    - name: vLastName
+      value: Doe
+    - name: vBirthDate
+      value: 1990-05-20
+    - name: vGender
+      value: F
+  assertions:
+    - expression: res.status
+      operator: eq
+      value: "201"
+    - expression: res.body.id
+      operator: gt
+      value: "0"
+    - expression: res.body.lastName
+      operator: eq
+      value: '"{{vLastName}}"'
+    - expression: res.headers.location
+      operator: contains
+      value: /patients/
+    - expression: res.body.firstName
+      operator: eq
+      value: '"{{vFirstName}}"'
+    - expression: res.body.birthDate
+      operator: eq
+      value: '"{{vBirthDate}}"'
+    - expression: res.body.gender
+      operator: eq
+      value: '"{{vGender}}"'
+  actions:
+    - type: set-variable
+      phase: after-response
+      selector:
+        expression: res.body.id
+        method: jsonq
+      variable:
+        name: createdId
+        scope: runtime
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
