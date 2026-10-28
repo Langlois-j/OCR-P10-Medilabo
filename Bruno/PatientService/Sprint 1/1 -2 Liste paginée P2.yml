@@ -1,0 +1,38 @@
+info:
+  name: 1 -2 Liste paginée P2
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: "{{baseUrl}}/patients?page=2&pageSize=2"
+  params:
+    - name: page
+      value: "2"
+      type: query
+    - name: pageSize
+      value: "2"
+      type: query
+  auth: inherit
+
+runtime:
+  assertions:
+    - expression: res.status
+      operator: eq
+      value: "200"
+    - expression: res.body.items.length
+      operator: eq
+      value: "2"
+    - expression: res.body.page
+      operator: eq
+      value: "2"
+    - expression: res.body.pageSize
+      operator: gte
+      value: "2"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
