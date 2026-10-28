@@ -1,0 +1,35 @@
+info:
+  name: 2-1 Détail patient ID:1
+  type: http
+  seq: 4
+
+http:
+  method: GET
+  url: "{{baseUrl}}/patients/{{ControleId}}"
+  auth: inherit
+
+runtime:
+  variables:
+    - name: ControleName
+      value: TestNone
+    - name: ControleGender
+      value: F
+    - name: ControleId
+      value: "1"
+  assertions:
+    - expression: res.status
+      operator: eq
+      value: "200"
+    - expression: res.body.lastName
+      operator: eq
+      value: '"{{ControleName}}"'
+    - expression: res.body.gender
+      operator: eq
+      value: '"{{ControleGender}}"'
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

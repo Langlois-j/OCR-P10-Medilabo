@@ -1,0 +1,49 @@
+info:
+  name: 4-0 Mise à jour patient Valide
+  type: http
+  seq: 1
+
+http:
+  method: PUT
+  url: "{{baseUrl}}/patients/{{createdId}}"
+  body:
+    type: json
+    data: |-
+      {
+        "firstName": "{{NewName}}",
+        "lastName": "Doe",
+        "birthDate": "1990-05-20",
+        "gender": "F",
+        "address": "{{NewAddress}}",
+        "phoneNumber": "{{NewPhone}}"
+      }
+  auth: inherit
+
+runtime:
+  variables:
+    - name: NewName
+      value: Sam
+    - name: NewPhone
+      value: "000000000000"
+    - name: NewAddress
+      value: Place
+  assertions:
+    - expression: res.status
+      operator: eq
+      value: "200"
+    - expression: res.body.address
+      operator: eq
+      value: '"{{NewAddress}}"'
+    - expression: res.body.phoneNumber
+      operator: eq
+      value: '"{{NewPhone}}"'
+    - expression: res.body.firstName
+      operator: eq
+      value: '"{{NewName}}"'
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
