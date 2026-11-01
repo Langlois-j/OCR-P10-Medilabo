@@ -1,5 +1,6 @@
 {
   "Routes": [
+    // --- PatientService (S1) ---
     {
       "UpstreamPathTemplate": "/patients",
       "UpstreamHttpMethod": [ "Get", "Post" ],
@@ -24,6 +25,8 @@
         }
       ]
     }
+    // --- NotesService (S2) : routes à ajouter ici ---
+    // --- RiskService (S3) : routes à ajouter ici ---
   ],
   "GlobalConfiguration": {}
 }
