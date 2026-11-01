@@ -1,4 +1,29 @@
 {
-  "Routes": [],
+  "Routes": [
+    {
+      "UpstreamPathTemplate": "/patients",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/patients",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5148
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/patients/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/patients/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5148
+        }
+      ]
+    }
+  ],
   "GlobalConfiguration": {}
 }
