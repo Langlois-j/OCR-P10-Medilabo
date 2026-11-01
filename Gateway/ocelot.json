@@ -2,7 +2,7 @@
   "Routes": [
     {
       "UpstreamPathTemplate": "/patients",
-      "UpstreamHttpMethod": [ "Get" ],
+      "UpstreamHttpMethod": [ "Get", "Post" ],
       "DownstreamPathTemplate": "/patients",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -14,7 +14,7 @@
     },
     {
       "UpstreamPathTemplate": "/patients/{id}",
-      "UpstreamHttpMethod": [ "Get" ],
+      "UpstreamHttpMethod": [ "Get", "Put" ],
       "DownstreamPathTemplate": "/patients/{id}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
