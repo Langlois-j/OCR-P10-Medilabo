@@ -1,0 +1,32 @@
+{
+  "Routes": [
+    // --- PatientService (S1) ---
+    {
+      "UpstreamPathTemplate": "/patients",
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "DownstreamPathTemplate": "/patients",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5148
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/patients/{id}",
+      "UpstreamHttpMethod": [ "Get", "Put" ],
+      "DownstreamPathTemplate": "/patients/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5148
+        }
+      ]
+    }
+    // --- NotesService (S2) : routes à ajouter ici ---
+    // --- RiskService (S3) : routes à ajouter ici ---
+  ],
+  "GlobalConfiguration": {}
+}
