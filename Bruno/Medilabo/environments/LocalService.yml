@@ -2,7 +2,7 @@ name: LocalService
 variables:
   - name: patientUrl
     value: http://localhost:5148
-    description: ""
+    description: dotnet run --project PatientService --launch-profile http
   - name: authUrl
     value: http://localhost:5101
-    description: ""
+    description: dotnet run --project AuthService --launch-profile http

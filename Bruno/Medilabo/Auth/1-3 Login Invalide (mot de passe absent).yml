@@ -1,0 +1,31 @@
+info:
+  name: 1-3 Login Invalide (mot de passe absent)
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{authUrl}}/auth/login"
+  body:
+    type: json
+    data: |-
+      {
+        "username": "{{vUsername}}",
+      }
+  auth: inherit
+
+runtime:
+  variables:
+    - name: vUsername
+      value: Admin
+  assertions:
+    - expression: res.status
+      operator: eq
+      value: "400"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

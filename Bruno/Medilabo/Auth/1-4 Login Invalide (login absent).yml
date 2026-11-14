@@ -1,0 +1,31 @@
+info:
+  name: 1-4 Login Invalide (login absent)
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: "{{authUrl}}/auth/login"
+  body:
+    type: json
+    data: |-
+      {
+        "password": "{{vPassword}}"
+      }
+  auth: inherit
+
+runtime:
+  variables:
+    - name: vPassword
+      value: Admin#2026
+  assertions:
+    - expression: res.status
+      operator: eq
+      value: "400"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
