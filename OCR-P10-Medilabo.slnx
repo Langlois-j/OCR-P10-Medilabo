@@ -1,4 +1,6 @@
 <Solution>
+  <Project Path="AuthService.UnitTests/AuthService.UnitTests.csproj" />
+  <Project Path="AuthService/AuthService.csproj" />
   <Project Path="Front/Front.csproj" />
   <Project Path="Gateway/Gateway.csproj" />
   <Project Path="PatientService.IntegrationTests/PatientService.IntegrationTests.csproj" />

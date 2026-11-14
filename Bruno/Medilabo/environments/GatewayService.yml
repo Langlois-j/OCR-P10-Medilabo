@@ -1,0 +1,8 @@
+name: GatewayService
+variables:
+  - name: patientUrl
+    value: http://localhost:5258
+    description: ""
+  - name: authUrl
+    value: http://localhost:5258
+    description: ""

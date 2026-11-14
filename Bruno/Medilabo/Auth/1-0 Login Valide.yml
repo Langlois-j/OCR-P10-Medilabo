@@ -1,0 +1,39 @@
+info:
+  name: 1-0 Login Valide
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{authUrl}}/auth/login"
+  body:
+    type: json
+    data: |-
+      {
+        "username": "{{vUsername}}",
+        "password": "{{vPassword}}"
+      }
+  auth: inherit
+
+runtime:
+  variables:
+    - name: vUsername
+      value: Admin
+    - name: vPassword
+      value: Admin#2026
+  assertions:
+    - expression: res.status
+      operator: eq
+      value: "200"
+    - expression: res.body.token
+      operator: isString
+    - expression: res.body.token
+      operator: matches
+      value: ^[\w-]+\.[\w-]+\.[\w-]+$
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
