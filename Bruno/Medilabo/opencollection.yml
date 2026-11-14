@@ -1,7 +1,7 @@
 opencollection: 1.0.0
 
 info:
-  name: PatientService
+  name: Medilabo
 config:
   proxy:
     inherit: true
@@ -14,11 +14,7 @@ config:
         password: ""
       bypassProxy: ""
 
-request:
-  variables:
-    - name: baseUrl
-      value: http://localhost:5148
-      disabled: true
+
 bundled: false
 extensions:
   bruno:

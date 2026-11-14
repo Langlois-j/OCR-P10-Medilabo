@@ -1,17 +1,17 @@
 info:
-  name: 1-2 Liste paginée Page2
+  name: 1-1 Liste paginée Page1
   type: http
-  seq: 2
+  seq: 1
 
 http:
   method: GET
-  url: "{{baseUrl}}/patients?page=2&pageSize=2"
+  url: "{{patientUrl}}/patients?page=1&pageSize=20"
   params:
     - name: page
-      value: "2"
+      value: "1"
       type: query
     - name: pageSize
-      value: "2"
+      value: "20"
       type: query
   auth: inherit
 
@@ -20,15 +20,15 @@ runtime:
     - expression: res.status
       operator: eq
       value: "200"
+    - expression: res.body.totalCount
+      operator: gte
+      value: "4"
     - expression: res.body.items.length
-      operator: eq
-      value: "2"
+      operator: gte
+      value: "4"
     - expression: res.body.page
       operator: eq
-      value: "2"
-    - expression: res.body.pageSize
-      operator: eq
-      value: "2"
+      value: "1"
 
 settings:
   encodeUrl: true

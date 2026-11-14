@@ -1,0 +1,8 @@
+name: LocalService
+variables:
+  - name: patientUrl
+    value: http://localhost:5148
+    description: ""
+  - name: authUrl
+    value: http://localhost:5101
+    description: ""

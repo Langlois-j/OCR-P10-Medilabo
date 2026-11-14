@@ -1,16 +1,16 @@
 info:
-  name: 4-1 Mise à jour patient (introuvable)
+  name: 4-2 Mise à jour patient Invalide (Name)
   type: http
-  seq: 2
+  seq: 3
 
 http:
   method: PUT
-  url: "{{baseUrl}}/patients/0"
+  url: "{{patientUrl}}/patients/{{createdId}}"
   body:
     type: json
     data: |-
       {
-        "firstName": "Janet",
+        "firstName": "",
         "lastName": "Doe",
         "birthDate": "1990-05-20",
         "gender": "F",
@@ -23,7 +23,7 @@ runtime:
   assertions:
     - expression: res.status
       operator: eq
-      value: "404"
+      value: "400"
 
 settings:
   encodeUrl: true

@@ -1,5 +1,0 @@
-name: Gateway
-variables:
-  - name: baseUrl
-    value: http://localhost:5258
-    description: ""
