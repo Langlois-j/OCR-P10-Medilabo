@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PatientService.Dtos;
 using PatientService.Services;
 
 namespace PatientService.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("patients")]
 public sealed class PatientsController(IPatientsService service) : ControllerBase
