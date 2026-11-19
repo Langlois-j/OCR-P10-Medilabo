@@ -1,4 +1,8 @@
 {
+  "AuthenticationOptions": {
+    "AuthenticationProviderKey": "Bearer",
+    "AllowedScopes": []
+  },
   "Routes": [
     // --- PatientService (S1) ---
     {
@@ -22,6 +26,19 @@
         {
           "Host": "localhost",
           "Port": 5148
+        }
+      ]
+    },
+    // --- AuthService (S1) : route publique, sans authentification ---
+    {
+      "UpstreamPathTemplate": "/auth/login",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamPathTemplate": "/auth/login",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5101
         }
       ]
     }
