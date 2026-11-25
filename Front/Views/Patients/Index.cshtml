@@ -1,0 +1,41 @@
+@model PagedResult<PatientSummary>
+@{
+    ViewData["Title"] = "Patients";
+    var lastPage = Math.Max(1, (int)Math.Ceiling(Model.TotalCount / (double)Model.PageSize));
+}
+
+<h1>Patients</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Date de naissance</th>
+            <th>Genre</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var patient in Model.Items)
+        {
+            <tr>
+                <td>@patient.LastName</td>
+                <td>@patient.FirstName</td>
+                <td>@patient.BirthDate.ToString("dd/MM/yyyy")</td>
+                <td>@patient.Gender</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<nav>
+    @if (Model.Page > 1)
+    {
+        <a asp-action="Index" asp-route-page="@(Model.Page - 1)">Précédent</a>
+    }
+    <span>Page @Model.Page / @lastPage</span>
+    @if (Model.Page < lastPage)
+    {
+        <a asp-action="Index" asp-route-page="@(Model.Page + 1)">Suivant</a>
+    }
+</nav>
