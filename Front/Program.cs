@@ -1,3 +1,5 @@
+using Front.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -8,6 +10,7 @@ builder.Services.AddHttpClient("Gateway", client =>
     client.BaseAddress = new Uri(builder.Configuration["Gateway:BaseUrl"]
         ?? throw new InvalidOperationException("Gateway:BaseUrl is missing."));
 });
+builder.Services.AddScoped<IPatientApiClient, PatientApiClient>();
 
 var app = builder.Build();
 
@@ -28,6 +31,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    //pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Patients}/{action=Index}/{id?}");
 
 app.Run();
