@@ -3,6 +3,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddHttpClient("Gateway", client =>
+{
+    client.BaseAddress = new Uri(builder.Configuration["Gateway:BaseUrl"]
+        ?? throw new InvalidOperationException("Gateway:BaseUrl is missing."));
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
