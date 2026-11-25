@@ -1,7 +1,7 @@
 info:
   name: 1-2 Liste paginée Page2
   type: http
-  seq: 2
+  seq: 3
 
 http:
   method: GET

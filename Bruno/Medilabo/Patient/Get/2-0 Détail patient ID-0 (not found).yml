@@ -1,7 +1,7 @@
 info:
   name: 2-0 Détail patient ID:0 (not found)
   type: http
-  seq: 3
+  seq: 4
 
 http:
   method: GET
