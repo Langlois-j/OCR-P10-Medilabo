@@ -30,6 +30,15 @@ runtime:
     - expression: res.body.token
       operator: matches
       value: ^[\w-]+\.[\w-]+\.[\w-]+$
+  actions:
+    - type: set-variable
+      phase: after-response
+      selector:
+        expression: res.body.token
+        method: jsonq
+      variable:
+        name: token
+        scope: runtime
 
 settings:
   encodeUrl: true
